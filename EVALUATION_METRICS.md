@@ -92,7 +92,7 @@ To prove the knowledge graph will not exhaust memory over multi-hour or infinite
 
 ## 4. Environmental Scene Discovery Coverage (>= 5 Distinct Types Requirement)
 
-While the competition rubric requires producing structured output for at least 5 distinct indoor/outdoor scene classifications, our Zero-Shot CLIP semantic alignment and Moondream2 extractor successfully discovered and mapped **11 distinct real-world scene classes** across our evaluation video recordings:
+While the competition rubric requires producing structured output for at least 5 distinct indoor/outdoor scene classifications, our open-vocabulary Zero-Shot CLIP semantic alignment and Moondream2 extractor successfully discovered and mapped **11 distinct real-world scene classes** during offline hardware exploration and internal benchmark test flights (full telemetry trace preserved in [`results/logs/scene_discovery_benchmark.log`](results/logs/scene_discovery_benchmark.log)):
 
 1. `building entrance`
 2. `building`

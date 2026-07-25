@@ -1,6 +1,7 @@
 # query/interface.py
 from typing import List, Dict, Any, Optional
 from world_model.graph_store import InMemoryGraphStore
+from world_model.temporal_versioning import is_edge_active_at_frame
 from shared.enums import NodeStatus, RelationType
 from object_tracker.entity_registry import EntityRegistry
 import json
@@ -87,3 +88,16 @@ class QueryInterface:
             "updated_entities": updated_nodes,
             "new_facts": [f"{e.subject} {e.relation.value} {e.object}" for e in new_edges]
         }
+
+    def get_state_at_frame(self, frame_id: int) -> Dict[str, Any]:
+        """Retrieve structured world state as it stood at a specific historical frame index."""
+        nodes = []
+        for node in self.graph.get_all_nodes():
+            if node.first_observed_frame <= frame_id <= (node.last_observed_frame + 5):
+                nodes.append(node.id)
+        edges = []
+        for edge in self.graph._edges.values():
+            if is_edge_active_at_frame(edge, frame_id):
+                edges.append(f"{edge.subject} --[{edge.relation.value}]--> {edge.object}")
+        return {"frame_index": frame_id, "entities": nodes, "relationships": edges}
+

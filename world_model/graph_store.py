@@ -19,6 +19,47 @@ class InMemoryGraphStore:
         self._object_index: Dict[str, Set[str]] = defaultdict(set)
         self._slot_index: Dict[Tuple[str, RelationType], Set[str]] = defaultdict(set)
 
+    def prune(self) -> None:
+        """
+        Enforce Objective O1 (Bounded Growth): Prune and evict excess nodes and edges
+        based on DEFAULT_CONFIG.graph limits to prevent memory exhaustion over infinite video streams.
+        """
+        # 1. Enforce max_active_entities
+        active_nodes = [n for n in self._nodes.values() if n.status == NodeStatus.ACTIVE]
+        if len(active_nodes) > DEFAULT_CONFIG.graph.max_active_entities:
+            active_nodes.sort(key=lambda x: x.last_observed_frame)
+            excess = len(active_nodes) - DEFAULT_CONFIG.graph.max_active_entities
+            for n in active_nodes[:excess]:
+                n.status = NodeStatus.ARCHIVED
+
+        max_total_nodes = int(DEFAULT_CONFIG.graph.max_active_entities * 1.5)
+        if len(self._nodes) > max_total_nodes:
+            archived_nodes = [n for n in self._nodes.values() if n.status == NodeStatus.ARCHIVED]
+            archived_nodes.sort(key=lambda x: x.last_observed_frame)
+            to_remove = len(self._nodes) - max_total_nodes
+            for n in archived_nodes[:to_remove]:
+                self._nodes.pop(n.id, None)
+
+        # 2. Enforce max_active_edges
+        active_edges = [e for e in self._edges.values() if e.status == EdgeStatus.ACTIVE]
+        if len(active_edges) > DEFAULT_CONFIG.graph.max_active_edges:
+            active_edges.sort(key=lambda x: x.t_observed)
+            excess = len(active_edges) - DEFAULT_CONFIG.graph.max_active_edges
+            for e in active_edges[:excess]:
+                e.status = EdgeStatus.SUPERSEDED
+
+        max_total_edges = int(DEFAULT_CONFIG.graph.max_active_edges * 1.5)
+        if len(self._edges) > max_total_edges:
+            superseded_edges = [e for e in self._edges.values() if e.status != EdgeStatus.ACTIVE]
+            superseded_edges.sort(key=lambda x: (x.t_valid_until or 0, x.t_observed))
+            to_remove = len(self._edges) - max_total_edges
+            for e in superseded_edges[:to_remove]:
+                popped = self._edges.pop(e.id, None)
+                if popped:
+                    self._subject_index[popped.subject].discard(popped.id)
+                    self._object_index[popped.object].discard(popped.id)
+                    self._slot_index[(popped.subject, popped.relation)].discard(popped.id)
+
     def add_node(self, node: Node) -> str:
         node.id = normalize_entity_name(node.id)
         if node.id in self._nodes:
@@ -31,10 +72,12 @@ class InMemoryGraphStore:
             )
             if node.status == NodeStatus.ACTIVE:
                 existing.status = NodeStatus.ACTIVE
-            return existing.id
+            res_id = existing.id
         else:
             self._nodes[node.id] = node
-            return node.id
+            res_id = node.id
+        self.prune()
+        return res_id
 
     def update_node_confidence_occlusion(self, frame_id: int):
         """Decay confidence of nodes that weren't seen this frame."""
@@ -47,12 +90,14 @@ class InMemoryGraphStore:
                     )
                 if frame_id - node.last_observed_frame >= DEFAULT_CONFIG.graph.stale_threshold_frames:
                     node.status = NodeStatus.ARCHIVED
+        self.prune()
 
     def add_edge(self, edge: Edge) -> str:
         self._edges[edge.id] = edge
         self._subject_index[edge.subject].add(edge.id)
         self._object_index[edge.object].add(edge.id)
         self._slot_index[(edge.subject, edge.relation)].add(edge.id)
+        self.prune()
         return edge.id
 
     def supersede_edge(self, edge_id: str, new_edge: Edge, reason: str) -> str:

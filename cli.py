@@ -54,6 +54,7 @@ def main():
             print("  graph            - List all active relationship edges in the world")
             print("  object <name>    - Get full location, state, confidence, and visibility history for an object")
             print("  scene <name>     - List all objects currently in a specific scene/room")
+            print("  frame <idx>      - Query exact historical structured state at a specific frame index")
             print("  occluded         - List all currently occluded (temporarily hidden) objects")
             print("  archived         - List entities archived from previous scenes")
             print("  history          - View graph node/edge statistics")
@@ -78,6 +79,16 @@ def main():
             objs = query_engine.get_objects_in_scene(scene_name)
             print(f"\nObjects in '{scene_name}':")
             for o in objs: print(f"  - {o}")
+        elif action == "frame" and len(cmd) > 1:
+            try:
+                f_idx = int(cmd[1])
+                state = query_engine.get_state_at_frame(f_idx)
+                print(f"\nHistorical World State at Frame {f_idx}:")
+                print(f"  Entities: {', '.join(state['entities']) or 'None'}")
+                print("  Relationships:")
+                for r in state["relationships"]: print(f"    {r}")
+            except ValueError:
+                print("Invalid frame index. Usage: frame <integer>")
         elif action == "object" and len(cmd) > 1:
             obj_name = " ".join(cmd[1:])
             print("\n" + query_engine.explain(obj_name, current_frame))

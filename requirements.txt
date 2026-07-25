@@ -1,8 +1,8 @@
 moondream
-transformers
+transformers>=4.30.0
 ultralytics
 opencv-python
-pillow
+pillow>=9.0.0
 torch
 torchvision
 pydantic
@@ -10,6 +10,6 @@ pytest
 flask
 scikit-image
 pyyaml
-
-transformers>=4.30.0
-pillow>=9.0.0
+psutil
+numpy
+requests

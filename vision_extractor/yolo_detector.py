@@ -22,8 +22,11 @@ class YOLODetector:
             import torch
             self.model = YOLO(model_name)
             
-            # Accelerate YOLO on Mac M1 (Metal GPU)
-            if torch.backends.mps.is_available():
+            # Respect compliance default (CPU-only unless explicitly allowed by config)
+            if DEFAULT_CONFIG.hardware.force_cpu:
+                self.device = 'cpu'
+                logger.info("⚡ YOLO enforced to run on CPU (compliance default)")
+            elif torch.backends.mps.is_available():
                 self.device = 'mps'
                 logger.info("🚀 YOLO accelerated via Apple Metal (MPS)")
             elif torch.cuda.is_available():

@@ -3,6 +3,10 @@
 
 set -e
 
+# Enforce CPU-only execution for Ollama daemon (compliance default for Track 2)
+export OLLAMA_NUM_GPU=${OLLAMA_NUM_GPU:-0}
+echo "⚡ Executing in CPU-only compliance mode (OLLAMA_NUM_GPU=${OLLAMA_NUM_GPU})"
+
 # Default to bundled real classroom video recording
 VIDEO_PATH=${1:-"videos/VIDEO-2026-07-25-12-26-52.mp4"}
 

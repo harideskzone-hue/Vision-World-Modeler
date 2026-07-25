@@ -1,6 +1,9 @@
 # config.yaml
 # Empirical default thresholds for the Vision World Modeler
 
+hardware:
+  force_cpu: true  # Compliance default; set to false only if organizers confirm MPS is allowed
+
 vision_extractor:
   base_vlm_confidence: 0.55
   base_yolo_confidence: 0.40

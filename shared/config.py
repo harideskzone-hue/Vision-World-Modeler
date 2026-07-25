@@ -32,7 +32,12 @@ class FramePipelineConfig:
     ssim_skip_threshold: float = 0.95
 
 @dataclass
+class HardwareConfig:
+    force_cpu: bool = True   # compliance default; set to False only if organizers confirm MPS is allowed
+
+@dataclass
 class GlobalConfig:
+    hardware: HardwareConfig = field(default_factory=HardwareConfig)
     vision_extractor: VisionExtractorConfig = field(default_factory=VisionExtractorConfig)
     updater: UpdaterConfig = field(default_factory=UpdaterConfig)
     graph: GraphConfig = field(default_factory=GraphConfig)
@@ -50,6 +55,7 @@ class GlobalConfig:
                 return cls()
         
         return cls(
+            hardware=HardwareConfig(**data.get('hardware', {})),
             vision_extractor=VisionExtractorConfig(**data.get('vision_extractor', {})),
             updater=UpdaterConfig(**data.get('updater', {})),
             graph=GraphConfig(**data.get('graph', {})),

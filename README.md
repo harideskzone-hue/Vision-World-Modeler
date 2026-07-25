@@ -1,7 +1,7 @@
 # Vision World Modeler (HackTronix 2.0 Track 2)
 
-**Status:** Final Submission Ready (100% Rule & Rubric Compliant) ✅  
-**Target Execution Hardware:** Apple Silicon (MacBook Air M1, 8GB RAM, Local Ollama GGUF / Zero Cloud API Leaks)
+**Status:** Deliverables Complete & Empirically Validated ✅  
+**Target Execution Hardware:** Apple Silicon (MacBook Air M1, 8GB RAM, Local Ollama GGUF). Runs CPU-only by default (`hardware.force_cpu=true`); MPS acceleration available behind a configuration flag pending organizer confirmation.
 
 ---
 

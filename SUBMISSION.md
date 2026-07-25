@@ -1,7 +1,7 @@
 # HackTronix 2.0 Track 2 Final Submission: Vision World Modeler
 
-**Submission Status:** Final Submission Ready ✅ (100/100 Deliverables Complete & Empirically Validated)  
-**Target Hardware Execution:** Apple Silicon (MacBook Air M1, 8GB RAM, Local Ollama GGUF / CPU+MPS Acceleration)  
+**Submission Status:** Deliverables Complete & Empirically Validated ✅  
+**Target Hardware Execution:** Apple Silicon (MacBook Air M1, 8GB RAM, Local Ollama GGUF). Runs CPU-only by default (`hardware.force_cpu=True`); MPS acceleration available behind a configuration flag pending organizer confirmation.  
 
 ---
 

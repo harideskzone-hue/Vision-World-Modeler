@@ -7,6 +7,7 @@ from vision_extractor.base import VisionExtractor
 from vision_extractor.prompt_templates import SCENE_EXTRACTION_PROMPT
 from vision_extractor.scene_parser import SceneParser
 from shared.models import SceneObservation
+from shared.config import DEFAULT_CONFIG
 
 logger = logging.getLogger(__name__)
 
@@ -29,15 +30,22 @@ class MoondreamExtractor(VisionExtractor):
             return
 
         try:
-            # Detect M1 (MPS) or default to CPU, but force float16 to prevent memory swapping on 8GB Mac
-            device = "mps" if torch.backends.mps.is_available() else "cpu"
-            logger.info(f"Loading Moondream model {model_id} on {device} (float16)...")
+            # Respect force_cpu compliance default, otherwise detect M1 (MPS) or CPU
+            if DEFAULT_CONFIG.hardware.force_cpu:
+                device = "cpu"
+                dtype = torch.float32  # CPU inference on float32/float16
+                logger.info("⚡ Moondream enforced to run on CPU (compliance default)")
+            else:
+                device = "mps" if torch.backends.mps.is_available() else "cpu"
+                dtype = torch.float16
+            
+            logger.info(f"Loading Moondream model {model_id} on {device}...")
             
             self.model = AutoModelForCausalLM.from_pretrained(
                 model_id, 
                 trust_remote_code=True, 
                 revision=revision,
-                torch_dtype=torch.float16
+                torch_dtype=dtype
             ).to(device)
             self.tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision, trust_remote_code=True)
             logger.info("Moondream model loaded successfully.")

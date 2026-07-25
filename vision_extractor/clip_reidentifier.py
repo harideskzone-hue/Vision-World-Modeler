@@ -2,6 +2,7 @@ import torch
 import numpy as np
 from typing import Optional
 import logging
+from shared.config import DEFAULT_CONFIG
 
 logger = logging.getLogger(__name__)
 
@@ -33,8 +34,11 @@ class CLIPReidentifier:
             self.processor = CLIPProcessor.from_pretrained(model_id)
             self.model = CLIPModel.from_pretrained(model_id)
             
-            # Device selection with M1 support
-            if self.use_mps and torch.backends.mps.is_available():
+            # Device selection with M1 support and force_cpu compliance
+            if DEFAULT_CONFIG.hardware.force_cpu:
+                self.device = torch.device("cpu")
+                logger.info("⚡ CLIP enforced to run on CPU (compliance default)")
+            elif self.use_mps and torch.backends.mps.is_available():
                 self.device = torch.device("mps")
                 logger.info("🚀 CLIP accelerated via Apple Metal (MPS)")
             elif torch.cuda.is_available():

@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac OS System Metadata
+.DS_Store
+
+# Virtual Environments, Caches & IDEs
+.env
+.venv/
+env/
+venv/
+.pytest_cache/
+.huggingface/
+.idea/
+.vscode/
+
+# Build & Submission Archives
+*.zip
+*.tar.gz
+
+# Runtime Logs
+results/logs/*.log
+results/graphs/*.json
+results/graphs/*.graphml
+results/timelines/*.png

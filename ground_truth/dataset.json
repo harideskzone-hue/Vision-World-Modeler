@@ -1,0 +1,39 @@
+{
+  "video": "eval_video.mp4",
+  "total_frames": 4,
+  "scene_types": ["kitchen", "hallway"],
+  "frames": [
+    {
+      "frame_id": 1,
+      "scene_type": "kitchen",
+      "entities": [
+        {"name": "red_mug", "category": "container", "state": "empty", "present": true},
+        {"name": "wooden_table", "category": "furniture", "state": null, "present": true}
+      ]
+    },
+    {
+      "frame_id": 2,
+      "scene_type": "kitchen",
+      "entities": [
+        {"name": "red_mug", "category": "container", "state": "full", "present": true},
+        {"name": "wooden_table", "category": "furniture", "state": null, "present": true}
+      ]
+    },
+    {
+      "frame_id": 3,
+      "scene_type": "hallway",
+      "entities": [
+        {"name": "door", "category": "architecture", "state": "closed", "present": true}
+      ]
+    },
+    {
+      "frame_id": 4,
+      "scene_type": "kitchen",
+      "entities": [
+        {"name": "red_mug", "category": "container", "state": "full", "present": true},
+        {"name": "wooden_table", "category": "furniture", "state": null, "present": true},
+        {"name": "apple", "category": "food", "state": null, "present": true}
+      ]
+    }
+  ]
+}

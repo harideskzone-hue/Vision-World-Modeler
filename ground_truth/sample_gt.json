@@ -1,0 +1,27 @@
+{
+  "video": "kitchen_walkthrough.mp4",
+  "total_frames": 30,
+  "scene_types": ["kitchen"],
+  "frames": [
+    {
+      "frame_id": 0,
+      "scene_type": "kitchen",
+      "entities": [
+        {
+          "name": "wooden_table",
+          "category": "furniture",
+          "position": "center",
+          "state": null,
+          "present": true
+        },
+        {
+          "name": "red_mug",
+          "category": "container",
+          "position": "center",
+          "state": "empty",
+          "present": true
+        }
+      ]
+    }
+  ]
+}

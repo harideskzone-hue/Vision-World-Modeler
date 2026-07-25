@@ -1,0 +1,26 @@
+# config.yaml
+# Empirical default thresholds for the Vision World Modeler
+
+vision_extractor:
+  base_vlm_confidence: 0.55
+  base_yolo_confidence: 0.40
+  base_fused_confidence: 0.65
+
+updater:
+  corroboration_boost: 0.08
+  occlusion_decay: -0.03
+  r2_confidence_penalty: -0.20
+  corroboration_threshold: 3
+  confirmed_threshold: 0.75
+  uncertain_threshold: 0.50
+  max_confidence: 0.95
+  min_confidence: 0.10
+
+graph:
+  max_active_entities: 100
+  max_active_edges: 300
+  stale_threshold_frames: 30
+
+frame_pipeline:
+  frame_ring_buffer_size: 30
+  ssim_skip_threshold: 0.95

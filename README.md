@@ -81,16 +81,25 @@ Or generate custom performance reports directly:
 python3 scripts/benchmark.py videos/VIDEO-2026-07-25-12-26-52.mp4
 ```
 
-## 8. Evaluation & Deliverable Alignment (Track 2)
+## 8. Empirical Evaluation & Deliverable Alignment (Track 2)
+For full numerical validation, ground-truth reconciliation proofs, memory bounded growth charts, and our formal C1/C2/C3 scoring report, see our **[Empirical Evaluation & Validation Report (EVALUATION_METRICS.md)](EVALUATION_METRICS.md)**.
+
 Our implementation strictly achieves every objective and deliverable outlined in HackTronix 2.0 Track 2:
 1. **D2 - World Model & Updater**: Persistent graph store across continuous multi-frame sequences with enforced bounded growth limits and zero contradictory active states.
 2. **D3 - Vision Extractor**: Produces structured JSON descriptions across >=5 distinct scene types (demonstrating 11 unique scene classes in test demonstrations: *building entrance*, *building*, *parking lot*, *front yard*, *classroom*, *Library*, *room with large windows*, *room with tables*, *restaurant*, *room with vending machines*, *room with glass doors*).
-3. **D4 - State Reconciliation**: Seamlessly merges observations and dynamically archives outdated beliefs when rooms change or contradiction thresholds are exceeded.
+3. **D4 - State Reconciliation & Criterion C3**: Seamlessly merges observations and resolves state contradictions when the same room is visited twice with interim physical changes. Verify instantly via our automated evaluation suite:
+   ```bash
+   pytest tests/test_room_revisit_change.py -v
+   ```
 4. **Zero-Shot Semantic Compliance**: Zero hardcoded category mapping tables; utilizes CLIP zero-shot vector embeddings and IoU coordinate overlap.
 5. **Query Interface**: Fully queryable by location (`scene <name>`), historical frame timestamp (`frame <index>`), or individual entity explanation (`object <name>`).
 
-## 9. Performance Results & Architectural Invariants on Apple M1 (8GB RAM)
+## 9. Performance Results & Configuration Thresholds on Apple M1 (8GB RAM)
 - **Peak RAM Usage:** ~110.16 MB active python process memory (Zero swap thrashing due to Ollama GGUF backend & shared PyTorch weight references).
 - **Average Frame Latency:** ~2.7s per active inference frame (~0.01s on SSIM skipped frames).
 - **Graph Updates & Revision:** <3 ms per frame.
 - **Consistency Invariants:** Enforces 100% C1 (Stable ID), C2 (Temporal Validity), and C3 (Spatial/Single-occupancy) consistency as foundational **architectural invariants** (proven by design via deterministic edge superseding on contradiction).
+- **Temporal Configuration & Edge-Case Resilience (`config.yaml` / `shared/config.py`):**
+  - `stale_threshold_frames: 30`: Unseen occluded items have confidence decayed for 30 consecutive frames before clean transition to `ARCHIVED` status.
+  - `ssim_skip_threshold: 0.95`: Identical video frames bearing $\ge 95\%$ structural similarity are gated out, preventing compression artifact noise from triggering spurious state oscillation.
+  - `corroboration_boost: +0.08` / `min_confidence: 0.10`: Transient VLM bounding box hallucinations are systematically rejected without sustained multi-frame corroboration.

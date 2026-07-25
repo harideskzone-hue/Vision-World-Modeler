@@ -1,27 +1,37 @@
 {
   "video": "kitchen_walkthrough.mp4",
   "total_frames": 30,
-  "scene_types": ["kitchen"],
+  "scene_types": ["kitchen", "hallway", "dining_room"],
   "frames": [
-    {
-      "frame_id": 0,
-      "scene_type": "kitchen",
-      "entities": [
-        {
-          "name": "wooden_table",
-          "category": "furniture",
-          "position": "center",
-          "state": null,
-          "present": true
-        },
-        {
-          "name": "red_mug",
-          "category": "container",
-          "position": "center",
-          "state": "empty",
-          "present": true
-        }
-      ]
-    }
+    {"frame_id": 1, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 2, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 3, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "full", "present": true}]},
+    {"frame_id": 4, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "full", "present": true}]},
+    {"frame_id": 5, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "full", "present": true}]},
+    {"frame_id": 6, "scene_type": "hallway", "entities": [{"name": "door", "category": "architecture", "position": "left", "state": "closed", "present": true}]},
+    {"frame_id": 7, "scene_type": "hallway", "entities": [{"name": "door", "category": "architecture", "position": "left", "state": "closed", "present": true}]},
+    {"frame_id": 8, "scene_type": "hallway", "entities": [{"name": "door", "category": "architecture", "position": "left", "state": "open", "present": true}]},
+    {"frame_id": 9, "scene_type": "hallway", "entities": [{"name": "door", "category": "architecture", "position": "left", "state": "open", "present": true}]},
+    {"frame_id": 10, "scene_type": "dining_room", "entities": [{"name": "dining_chair", "category": "furniture", "position": "right", "state": null, "present": true}, {"name": "pendant_lamp", "category": "appliance", "position": "top", "state": "off", "present": true}]},
+    {"frame_id": 11, "scene_type": "dining_room", "entities": [{"name": "dining_chair", "category": "furniture", "position": "right", "state": null, "present": true}, {"name": "pendant_lamp", "category": "appliance", "position": "top", "state": "on", "present": true}]},
+    {"frame_id": 12, "scene_type": "dining_room", "entities": [{"name": "dining_chair", "category": "furniture", "position": "right", "state": null, "present": true}, {"name": "pendant_lamp", "category": "appliance", "position": "top", "state": "on", "present": true}]},
+    {"frame_id": 13, "scene_type": "dining_room", "entities": [{"name": "dining_chair", "category": "furniture", "position": "right", "state": null, "present": true}, {"name": "pendant_lamp", "category": "appliance", "position": "top", "state": "on", "present": true}]},
+    {"frame_id": 14, "scene_type": "dining_room", "entities": [{"name": "dining_chair", "category": "furniture", "position": "right", "state": null, "present": true}, {"name": "pendant_lamp", "category": "appliance", "position": "top", "state": "on", "present": true}]},
+    {"frame_id": 15, "scene_type": "dining_room", "entities": [{"name": "dining_chair", "category": "furniture", "position": "right", "state": null, "present": true}, {"name": "pendant_lamp", "category": "appliance", "position": "top", "state": "on", "present": true}]},
+    {"frame_id": 16, "scene_type": "hallway", "entities": [{"name": "door", "category": "architecture", "position": "left", "state": "open", "present": true}]},
+    {"frame_id": 17, "scene_type": "hallway", "entities": [{"name": "door", "category": "architecture", "position": "left", "state": "closed", "present": true}]},
+    {"frame_id": 18, "scene_type": "hallway", "entities": [{"name": "door", "category": "architecture", "position": "left", "state": "closed", "present": true}]},
+    {"frame_id": 19, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 20, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 21, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 22, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 23, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 24, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 25, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 26, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 27, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 28, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 29, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]},
+    {"frame_id": 30, "scene_type": "kitchen", "entities": [{"name": "wooden_table", "category": "furniture", "position": "center", "state": null, "present": true}, {"name": "red_mug", "category": "container", "position": "center", "state": "empty", "present": true}]}
   ]
 }

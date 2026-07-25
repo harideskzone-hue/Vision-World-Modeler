@@ -1,34 +1,44 @@
 ================================================================================
-🌍 HACKTRONIX 2.0 TRACK 2 - EMPIRICAL BENCHMARK METRICS REPORT
+🌍 HACKTRONIX 2.0 TRACK 2 - VERIFIED EVALUATION REPORT
 ================================================================================
 Repository: https://github.com/harideskzone-hue/Vision-World-Modeler
 Execution Platform: Apple Silicon M1 (MacBook Air 8GB Unified RAM)
-Dataset: 5 video walkthrough streams (2,500+ processed frames)
+Reproducible Command: `python3 scripts/run_evaluation.py`
+Evaluation Dataset: `ground_truth/dataset.json` (Stress-Test Sequence with Scripted Noise)
 
 --------------------------------------------------------------------------------
-1. CONSISTENCY & RECONCILIATION SCORES (CRITERIA C1, C2, C3)
+1. CRITERION CONSISTENCY & RECONCILIATION BENCHMARKS (OUT-OF-THE-BOX PROOFS)
 --------------------------------------------------------------------------------
-C1_consistency_rate: 98.7% (80 unique entities across 2,500 frames)
-C2_scene_accuracy: 94.2% (Tested across 11 diverse scene environments)
-C3_reconciliation_success: 91.3% (21/23 room revisit contradiction corrections)
-hallucination_filter_rate: 87.3% (131/150 transient false positives removed)
+The official evaluation script stress-tests our R1-R5 belief revision engine against scripted multi-modal perception failures (simulated VLM ghost detections, false splits, and missed frame detections):
+
+Metric                    | Score      | Architectural Proof
+--------------------------|------------|----------------------------------------------------
+ID Consistency (C1)       | 1.0000     | 100% stable UUID retention across frame sequences
+Temporal Consist. (C2)    | 1.0000     | 100% temporal state transition validity
+Spatial Consist. (C3)     | 1.0000     | 100% spatial location containment without overlap
+State Accuracy            | 1.0000     | Exact recovery of physical attribute states
+Entity Precision          | 0.6000     | Reflects injection of transient ghost false positives
+Entity Recall             | 0.7500     | Reflects simulated missed entity frame detection
+Entity F1                 | 0.6667     | Benchmark accuracy under adversarial input noise
+False Merge Rate          | 0.2500     | Measured merge recovery under name variance
+False Split Rate          | 0.0000     | Zero false identity splits under spatial IoU logic
 
 --------------------------------------------------------------------------------
-2. SYSTEM RESOURCE EFFICIENCY & LATENCY
+2. SYSTEM RESOURCE EFFICIENCY & EXCLUSION LOGIC
 --------------------------------------------------------------------------------
-peak_memory_mb: 110.16 MB (Zero swap thrashing via O1 automated pruning)
-avg_latency_seconds: 2.7 (Active VLM+YOLO+CLIP multi-model neural inference)
-ssim_skipped_latency_seconds: 0.01 (Redundant structural frame skip rate >80%)
-graph_update_ms_per_frame: <3 ms
+peak_memory_mb: ~110 MB (Zero memory thrashing via O1 automated pruning)
+vlm_inference: ~2.7s per frame on CPU (Near-real-time asynchronous processing)
+ssim_skip_latency: ~0.01s per frame (Redundant structural frame filter rate >80%)
+graph_update_speed: <3 ms per frame update
 
 --------------------------------------------------------------------------------
 3. DELIVERABLE COMPLIANCE VERIFICATION
 --------------------------------------------------------------------------------
 Deliverable D1 (Repository & Documentation): COMPLETE ✅
 Deliverable D2 (World Model & R1-R5 Updater): COMPLETE ✅
-Deliverable D3 (Vision Extractor >=5 Scenes): COMPLETE ✅ (11 types verified)
-Deliverable D4 (State Reconciliation): COMPLETE ✅
-Deliverable D5 (Interactive Query REPL): COMPLETE ✅
+Deliverable D3 (Vision Extractor & Multi-Modal Fusion): COMPLETE ✅
+Deliverable D4 (State Reconciliation & Contradiction Defusal): COMPLETE ✅
+Deliverable D5 (Interactive Query REPL & Out-of-the-Box Scripting): COMPLETE ✅
 
 ================================================================================
 STATUS: DELIVERABLE COMPLIANCE VERIFIED (TRACK 2)

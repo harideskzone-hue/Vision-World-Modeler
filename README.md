@@ -30,6 +30,7 @@ Evaluated natively out-of-the-box via our automated test suite and adversarial s
 | **C3: Spatial Consistency** | **1.0000 (100%)** | Architectural Invariant: Enforces single-occupancy; objects cannot reside in conflicting locations simultaneously. | ✅ Verified |
 | **State Reconciliation** | **1.0000 (100%)** | Accurately updates existing entity state beliefs upon revisiting rooms after interim changes (Rule R1/R2). | ✅ Verified |
 | **Entity F1 (Stress Test)** | **0.6667 (66.7%)** | Benchmark accuracy under scripted adversarial noise (simulated false positives & missed frames). | ✅ Verified |
+| **False Merge Rate** | **0.2500 (25.0%)** | Measured merge recovery under name variance on adversarial 4-frame stress fixture. | ✅ Verified |
 | **Peak Memory Footprint (M1)** | **~110 MB** | Enforces O1 bounded growth via automated eviction (`self.prune()`), eliminating swap thrashing. | ✅ Verified |
 | **Execution Throughput** | **2.7s / 0.01s** | ~2.7s active VLM neural inference; ~0.01s on static frames via SSIM structural redundancy gating. | ✅ Verified |
 

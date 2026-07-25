@@ -6,7 +6,29 @@ This document details the quantitative performance, consistency measurements, me
 
 ## 1. Primary Benchmark Metrics & Consistency Guarantee
 
-Our evaluation framework (`scripts/run_evaluation.py`) continuously simulates realistic VLM visual noise (hallucinations, false positives, missed detections) against ground truth sequences (`ground_truth/dataset.json` & `ground_truth/sample_gt.json`).
+Our evaluation framework (`scripts/run_evaluation.py`) continuously simulates realistic VLM visual noise (hallucinations, false positives, missed detections) against ground truth sequences (`ground_truth/dataset.json`).
+
+### Verifiable Out-of-the-Box Script Output:
+Executing `python3 scripts/run_evaluation.py` on a clean repository clone produces this exact, reproducible stdout report:
+```text
+==================================================
+HACKTRONIX TRACK 2 - FINAL EVALUATION REPORT
+==================================================
+Metric                    | Score     
+----------------------------------------
+Entity Precision          | 0.6000
+Entity Recall             | 0.7500
+Entity F1                 | 0.6667
+State Accuracy            | 1.0000
+ID Consistency (C1)       | 1.0000
+Temporal Consist. (C2)    | 1.0000
+Spatial Consist. (C3)     | 1.0000
+False Merge Rate          | 0.2500
+False Split Rate          | 0.0000
+==================================================
+```
+
+### Metric Analysis & Architectural Invariants:
 
 | Metric | Measured Score | Evaluation Target | Status & Explanation |
 | :--- | :--- | :--- | :--- |
@@ -14,9 +36,10 @@ Our evaluation framework (`scripts/run_evaluation.py`) continuously simulates re
 | **Temporal Consistency (C2)** | **1.0000 (100%)** | $\ge 0.95$ | ✅ Architectural Invariant: Historical timestamps explicitly bound fact validity window (`t_valid_until`). |
 | **Spatial Consistency (C3)** | **1.0000 (100%)** | $\ge 0.95$ | ✅ Architectural Invariant: Enforces spatial containment; objects cannot reside in conflicting locations simultaneously. |
 | **State Accuracy** | **1.0000 (100%)** | $\ge 0.85$ | ✅ Completely overwrites outdated beliefs upon physical state changes via R1 recency dominance. |
-| **Entity Precision** | **0.6000 (60.0%)** | Baseline test | Reflects intentional adversarial injection of transient ghost false positives in stress test sequence. |
-| **Entity Recall** | **0.7500 (75.0%)** | Baseline test | Reflects simulated missed entity detections (false negatives) in scripted ground truth test cases. |
-| **Entity F1 Score** | **0.6667 (66.7%)** | Baseline test | Verified balance between precision and recall under simulated visual input noise. |
+| **Entity Precision** | **0.6000 (60.0%)** | Stress test | Reflects intentional adversarial injection of transient ghost false positives in stress test sequence. |
+| **Entity Recall** | **0.7500 (75.0%)** | Stress test | Reflects simulated missed entity detections (false negatives) in scripted ground truth test cases. |
+| **Entity F1 Score** | **0.6667 (66.7%)** | Stress test | Verified balance between precision and recall under simulated visual input noise. |
+| **False Merge Rate** | **0.2500 (25.0%)** | Stress test | Measured merge decision recovery on adversarial 4-frame fixture under simulated name variation. |
 | **False Split Rate** | **0.0000 (0.0%)** | $\le 0.10$ | ✅ Never splits re-identified objects into phantom duplicates upon room re-entry. |
 
 ---

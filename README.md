@@ -15,6 +15,7 @@ For in-depth code reviews, evaluation verification, parameter tuning justificati
 | **[EVALUATION_METRICS.md](EVALUATION_METRICS.md)** | **Empirical Evaluation Report** | Verified numerical scores (100% C1-C3 Consistency, 86.4% Precision), ground-truth reconciliation diagrams, and bounded growth proofs. |
 | **[ARCHITECTURE.md](ARCHITECTURE.md)** | **Technical System Architecture** | Detailed decoupled data flows across Moondream+YOLO+CLIP, entity registry, and R1-R5 belief revision rules. |
 | **[PARAMETERS_TUNED.md](PARAMETERS_TUNED.md)** | **Parameter Tuning Report** | Explicit empirical calibration tables justifying CLIP (0.75), SSIM (0.95), and occlusion timeout (30-frame) thresholds. |
+| **[JUDGE_DEFENSE.md](JUDGE_DEFENSE.md)** | **Judge Q&A & Technical Defense Hub** | Explicit cross-examination preparations addressing streaming latency, metric sample sizing, zero-shot rules vs. schema antonyms, and air-gapped demo reproducibility. |
 
 ---
 

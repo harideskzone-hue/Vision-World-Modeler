@@ -22,8 +22,15 @@ fi
 
 if ! curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
     echo "WARNING: Local Ollama daemon not responding at http://localhost:11434."
-    echo "Please ensure Ollama is running and 'ollama pull moondream' has been executed."
-    echo "Fallback architectural mock execution will proceed if video inference fails."
+    echo "⚡ FOR OFFLINE HACKATHON PRESENTATION: Ensure local GGUF weights are cached and daemon is active."
+    echo "Fallback deterministic mock presentation mode will activate seamlessly if daemon is offline."
+else
+    # Check if moondream is cached locally without network calls
+    if curl -s http://localhost:11434/api/tags | grep -q "moondream"; then
+        echo "✅ Offline Moondream GGUF cache verified locally. Zero internet connection required."
+    else
+        echo "⚠️ Moondream weights not detected in local Ollama cache. Please precache via 'ollama pull moondream' before live stage demonstration."
+    fi
 fi
 
 echo "[2/4] Running End-to-End Vision World Pipeline on '${VIDEO_PATH}'..."

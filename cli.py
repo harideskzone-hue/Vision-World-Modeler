@@ -8,6 +8,8 @@ from shared.enums import NodeStatus
 
 def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S")
+    for noisy_logger in ["httpx", "urllib3", "urllib3.connectionpool", "huggingface_hub", "transformers", "fsspec"]:
+        logging.getLogger(noisy_logger).setLevel(logging.WARNING)
     parser = argparse.ArgumentParser(description="Vision World Modeler CLI Inspector")
     parser.add_argument("--video", type=str, help="Path to video file to process")
     parser.add_argument("--mock", action="store_true", help="Run with mock data (fast test)")

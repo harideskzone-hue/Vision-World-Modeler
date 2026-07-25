@@ -25,3 +25,6 @@ results/logs/*.log
 results/graphs/*.json
 results/graphs/*.graphml
 results/timelines/*.png
+*.pt
+*.mp4
+*.pdf
